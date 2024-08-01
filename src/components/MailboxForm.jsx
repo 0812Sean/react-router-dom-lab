@@ -3,40 +3,49 @@ import { useNavigate } from 'react-router-dom';
 
 const MailboxForm = (props) => {
   const [boxholder, setBoxholder] = useState('');
+  const [boxSize, setBoxSize] = useState('Small');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addBox(boxholder);
-    setBoxholder([])
+    props.addBox({ boxholder, boxSize });
+    setBoxholder('')
+    setBoxSize('Small');
     navigate('/mailboxes');
   };
 
-  const handleChange = ({ target }) => {
-    setBoxholder({ ...formData, [target.name]: target.value });
+  const handleBoxholderChange = ({ target }) => {
+    setBoxholder(target.value);
+  };
+
+  const handleBoxSizeChange = ({ target }) => {
+    setBoxSize(target.value);
   };
 
   return (
     <main>
      <h1>New Mailbox</h1>
      <form onSubmit={handleSubmit}>
-      <label htmlFor='name'>Enter a Boxholder</label>
+      <label htmlFor='boxholder'>Enter a Boxholder:</label>
         <input 
         type="text" 
-        id='name'
-        name='name'
+        id="boxholder"
+        name="boxholder"
         value={boxholder} 
-        onChange={handleChange}
+        onChange={handleBoxholderChange}
         />
-      <label>
-        Box Size:
-        <select value={boxSize}           
-        onChange={handleChange}>
+        <label htmlFor="boxSize">Box Size:</label>
+        <select
+          id="boxSize"
+          name="boxSize"
+          value={boxSize}
+          onChange={handleBoxSizeChange}
+        >
           <option value="Small">Small</option>
           <option value="Medium">Medium</option>
           <option value="Large">Large</option>
         </select>
-      </label>
+
       <button type="submit">Submit</button>
     </form>
     </main>

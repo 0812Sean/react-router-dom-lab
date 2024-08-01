@@ -44,3 +44,13 @@ textarea {
 button {
   background-color: #535bf2;
 }
+
+.mail-box {
+  width: 70px;
+  height: 70px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
